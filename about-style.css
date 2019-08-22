@@ -1,0 +1,118 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    font-family: 'Caveat Brush', cursive;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+.about h1{ 
+    font-size: 120px;
+    color: #c77d36;
+    text-align: center;
+}
+.content{
+    margin-top: 20px;
+    width: 400px;
+}
+.about-detels{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.about-detels span {
+    display: block;
+}
+.line{
+    width: 220px;
+    height: 10px;
+    line-height: 0;
+    border-bottom: 2px dotted #c77d36;
+    margin-right: 10px;
+    margin-left: 10px;
+    font-size: 20px;
+    outline: none;
+    font-family: 'Lexend Exa', sans-serif;
+
+}
+.detels{
+    font-size: 30px;
+    color: #c77d36;
+}
+footer{
+    margin-top: 50px;
+    position: relative;
+}
+footer p {
+    font-family: 'Lexend Exa', sans-serif;
+    font-weight: 400;
+    font-size: 17px;
+    margin-bottom: 10px;
+    letter-spacing: -1px;
+    color: #333;
+    position: relative;
+}
+footer p:nth-child(1)::before{
+    content: '';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: -25px;
+    border-left: 13px solid #c77d36;
+    border-top: 7px solid transparent;
+    border-bottom: 7px solid transparent;
+    border-right: 5px solid transparent;
+}
+footer p:nth-child(2)::before,
+footer p:nth-child(2)::after{
+    content: '';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: -15px;
+    width: 6px;
+    height: 15px;
+    background-color: #333;
+}
+footer p:nth-child(2)::after{
+    left: -25px;
+}
+footer p:nth-child(3)::before{
+    content: '';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: -25px;
+    width: 15px;
+    height: 15px;
+    background-color: #333;
+}
+footer p:nth-child(4)::before,
+footer p:nth-child(4)::after{
+    content: '';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: -45px;
+    border-right: 13px solid #333;
+    border-top: 7px solid transparent;
+    border-bottom: 7px solid transparent;
+    border-left: 5px solid transparent;
+}
+footer p:nth-child(4)::after{
+    left: -25px;
+}
+footer i{
+    position: absolute;
+    right: -100px;
+    color: #444;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 115px;
+}
