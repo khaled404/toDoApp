@@ -25,23 +25,17 @@
         <div class="left">
                 <div class="box-left-top">
                         <p>today is</p>
-                        <span contenteditable></span>
+                        <textarea id="today" name="day"></textarea>
                         <img src="font/custom.svg" alt="custom icon">
                     </div>
                     <div class="box-left-bottom">
                         <fieldset>
                             <legend>To Do List</legend>
                             <form class="addcontiner">
-                                <input type="text"  name="inputValue" placeholder="Add To Do List" class="addInput">
+                                <input type="text"  name="inputValue" placeholder="Add To Do List" class="addInput" autocomplete="off">
                                 <button class="addCheckbox">Add</button>
                             </form>
                             <ul class="boxs">
-                                <!-- <li>
-                                    <input type='checkbox' id='WkbmECwueyqBvSCBsxHi' class='checkbox'>
-                                    <label class='box' for='WkbmECwueyqBvSCBsxHi'><i class='flaticon-check'></i></label>
-                                    <input type="text" name="value" class="inputVal">
-                                    <button class='close'>DEL</button>
-                                </li>-->
                             </ul>
                         </fieldset>
                     </div>
@@ -67,7 +61,7 @@
         </div>
     <!-- footer -->
     <footer>
-        <span class="footer-line" contenteditable></span>
+        <textarea id="footerLine" class="footer-line"></textarea>
         <div class="footer-title">
             <p>Todays Song Quoces</p>
         </div>    
@@ -81,7 +75,7 @@
         </div>
         <div class="footer-name">
             <span class="name"> Song name</span>
-            <span class="line" contenteditable></span>
+            <span id="songName" class="line" contenteditable></span>
         </div>
         <div class="logo">
             <h2>دَوَّنَهَا</h2>

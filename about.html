@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/6.5.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.5.0/firebase-firestore.js"></script>    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -41,6 +44,27 @@
         <p>Rewind the happiness.</p>
         <i class="flaticon-clef"></i>
     </footer>
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+    https://firebase.google.com/docs/web/setup#config-web-app -->
+
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyCl6FDQHbPf4i6nQPUVZ7jJ8slk6NFIWfk",
+            authDomain: "todoapp-17c55.firebaseapp.com",
+            databaseURL: "https://todoapp-17c55.firebaseio.com",
+            projectId: "todoapp-17c55",
+            storageBucket: "todoapp-17c55.appspot.com",
+            messagingSenderId: "124446634804",
+            appId: "1:124446634804:web:9f734f413e686547"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+        // db.settings({timestampsInSnapshots: true});
+    </script>   
+        
+        
     <script src="main.js" ></script>
     </body>
 </html>
