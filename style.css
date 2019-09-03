@@ -106,12 +106,11 @@ body{
 /*note-body-bottom*/
 .note-body-bottom{
     display: flex;
-    width: 200px;
 }
 .box-left-bottom fieldset{
     text-align: center;
-    width: 100%;
     min-height: 330px;
+
     transform: translateY(50px);
     border-radius: 30px;
     border: 4px solid #4d47ad;
@@ -123,26 +122,33 @@ body{
     font-size: 50px;
     color: #c77d36;
 }
-.toDobox{
+.boxs{
+    margin-top: 16px;
+}
+.boxs li{
     display: flex;
     align-items: center;
+    position: relative;
 }
-.toDobox:not(:first-of-type){
+.boxs li:not(:first-of-type){
     margin-top: 15px;
 }
-.toDobox span{
+li .inputVal{
     display: block;
     font-family: 'Lexend Exa', sans-serif;
-
-}
-.toDobox .box{
-    width: 25px;
+    width: 190px;
+    margin: 0 10px;
+    border-bottom: 1px solid #c77d36;
+    text-align: left;
+}   
+ label{
+    width: 22px;
     height: 20px;
     border: 1.2px solid #c77d36;
     position: relative;
     cursor: pointer;
 }
-.toDobox .box i{
+label i{
     position: absolute;
     font-size: 25px;
     color: #4d47ad;
@@ -151,28 +157,63 @@ body{
     transform: translate(-50%,-50%);
     display: none;
 }
-.checkbox:checked ~ .box i{
+.checkbox:checked ~ label i{
     display: block;
-}
-.checkbox:checked ~ span{
-    color: #888;
-    text-decoration: line-through;
 }
 .checkbox{
     display: none;
 }
-.toDobox .toLine{
-    width: 100%;
-    height: 10px;
-    line-height: 0;
-    font-size: 20px;
-    text-align: left;
+.checkbox:checked ~ .inputVal{
+    color: #888;
+    text-decoration: line-through;
+}
+.close{
+    background-color: transparent;
+    position: absolute;
+    right: 5px;
+    top: 0;
+    transform: translateY(-40%);
     outline: none;
-    border-bottom: 2px dotted #c77d36;
-    margin-right: 10px;
-    margin-left: 10px;
+    cursor: pointer;
+    color: #4d47ad;
+    transition: .5s;
+    opacity: 0;
+    font-size: 25px;
+    font-weight: 900;
+}
+.close:hover{
+    color: #c77d36
+}
+.checkbox:checked ~ .close{
+    visibility: visible;
+    opacity: 1;
+}
+.addcontiner{
+    width: max-content;
+    position: relative;
+}
+.addInput{
+    border: none;
+    padding: 5px 0;
+    color: #4d47ad;
+    border-bottom: 1px solid #c77d36;
+    outline: none;
+    font-size: 15px;
     font-family: 'Lexend Exa', sans-serif;
-
+    width: 100%;
+}
+.addCheckbox{
+    padding: 5px ;
+    cursor: pointer;
+    background-color: #c77d36;
+    color: #fff;
+    border: none;
+    outline: none;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    text-decoration: none;
 }
 footer{
     width: 100%;
@@ -181,7 +222,7 @@ footer{
     border: 2px solid #c77d36;
     border-radius: 50px;
     padding: 10px;
-    margin: 35px 10px 10px;
+    margin: 100px 10px 10px;
     position: relative;
 }
 .icon-box{
