@@ -7,6 +7,8 @@ if(body.classList.contains('main')){
     const today = document.getElementById('today');
     const footerLine = document.getElementById('footerLine');
     const songName = document.getElementById('songName');
+    const titel = document.getElementById('titel');
+    const subTitel = document.getElementById('subTitel');
     //create elments and render data
     function renderList(doc){
         let li = document.createElement('li');
@@ -111,6 +113,8 @@ if(body.classList.contains('main')){
             today.value = doc.data().toDay
             footerLine.value = doc.data().songQuoces
             songName.textContent = doc.data().songName
+            titel.textContent = doc.data().titel
+            subTitel.textContent = doc.data().subTitel
         });
     });
     document.addEventListener('keyup',e =>{
@@ -118,6 +122,8 @@ if(body.classList.contains('main')){
             toDay : today.value,
             songQuoces : footerLine.value,
             songName : songName.textContent,
+            titel : titel.textContent,
+            subTitel : subTitel.textContent,
         });
     })
 

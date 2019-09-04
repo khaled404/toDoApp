@@ -110,6 +110,9 @@ body{
     line-height: 0;
     
 }
+*{
+    outline: none;
+}
 /*note-body-bottom*/
 .note-body-bottom{
     display: flex;
