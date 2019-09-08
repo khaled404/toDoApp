@@ -178,24 +178,20 @@ if(body.classList.contains('main')){
     fbBtn.addEventListener('click', (e) =>{
         e.preventDefault();
         auth.signInWithPopup(provider).then((cred) => {
-            
             const userName = singUpForm['singUp-name'];
             return db.collection('userData').doc(cred.user.uid).set({
-                userName: userName.value,
+                userName: 'Default User Name',
                 textArea : '',
                 toDay : '',
                 songQuoces : '',
                 songName : '',
-                titel : 'hello ' + userName.value,
+                titel : 'Titel',
             }).then(()=>{
                 return db.collection(cred.user.uid)
             }).then(()=>{
                 overlay.click()
                 singUpForm.reset();
             })
-            
-
-
         })
               
 
