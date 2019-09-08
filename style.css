@@ -134,6 +134,19 @@ nav ul li a:hover{
     letter-spacing: 1px;
     margin-top: 20px;
 }
+#dataInfo{
+    margin-bottom: auto;
+}
+#dataInfo h3 {
+    font-size: 25px;
+    color: #4d47ad;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+
+}
+#dataInfo h3 span {
+    color:#c77d36;
+}
 .bobup form,
 .logInmain form{
     display: flex;

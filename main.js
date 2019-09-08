@@ -10,8 +10,6 @@ if(body.classList.contains('main')){
         const songName = document.getElementById('songName');
         const titel = document.getElementById('titel');
         function renderList(doc){
-            // const subTitel = document.getElementById('subTitel');
-            //create elments and render data
             let li = document.createElement('li');
             let inputChake =document.createElement('input');
             let label =document.createElement('label');
@@ -29,7 +27,6 @@ if(body.classList.contains('main')){
             inputChake.setAttribute('name','toDochack');
             inputChake.setAttribute('class','checkbox');
             inputChake.setAttribute('id',doc.id);
-            // inputVal.setAttribute('type','text');
             inputVal.setAttribute('class','inputVal');
             inputVal.setAttribute('name','inputVal');
             li.setAttribute('data-id',doc.id);
@@ -47,23 +44,21 @@ if(body.classList.contains('main')){
             closebutton.addEventListener('click', (e) =>{
                 e.stopPropagation()
                let id = e.target.parentElement.getAttribute('data-id');
-                db.collection(auth.Nb.O).doc(id).delete();
+                db.collection(auth.O).doc(id).delete();
             })
         }
-        // console.log(auth.Nb.O)
-
         // add item
         addItem.addEventListener('submit',e => {
             e.preventDefault()
             if(addItem.inputValue.value != ''){
-                db.collection(auth.Nb.O).add({
+                db.collection(auth.O).add({
                     itemVal : addItem.inputValue.value,
                 });
                 addItem.inputValue.value = '';
             }
         })
         // remove data
-        db.collection(auth.Nb.O).onSnapshot(snapshot => {
+        db.collection(auth.O).onSnapshot(snapshot => {
             let changes = snapshot.docChanges();
             changes.forEach((change) =>{
                 if(change.type == 'added'){
@@ -84,17 +79,18 @@ if(body.classList.contains('main')){
                 });
             }
         });
-        db.collection('userData').doc(auth.Nb.O).get().then((doc) => {
-                textArea.value = doc.data().textArea
-                today.value = doc.data().toDay
-                footerLine.value = doc.data().songQuoces
-                songName.textContent = doc.data().songName
-                titel.textContent = doc.data().titel
+        const getUserName = document.querySelector('.userName');
+        db.collection('userData').doc(auth.O).get().then((doc) => {
+                textArea.value = doc.data().textArea;
+                today.value = doc.data().toDay;
+                footerLine.value = doc.data().songQuoces;
+                songName.textContent = doc.data().songName;
+                titel.textContent = doc.data().titel;
+                getUserName.textContent = doc.data().userName;
         });
-    
         document.addEventListener('keyup',e => {
-            if(auth.Nb.O){
-                db.collection('userData').doc(auth.Nb.O).update({
+            if(auth.O){
+                db.collection('userData').doc(auth.O).update({
                     textArea : textArea.value,
                     toDay : today.value,
                     songQuoces : footerLine.value,
@@ -111,8 +107,8 @@ if(body.classList.contains('main')){
     navItem.forEach(e => {
         e.addEventListener('click', el => {
             const bobup = document.getElementById(el.target.getAttribute('data-id'));
-                bobup.classList.add('activebob');
-                overlay.classList.add('active');
+            bobup.classList.add('activebob');
+            overlay.classList.add('active');
         })
     })
     overlay.addEventListener('click',()=>{
@@ -122,7 +118,6 @@ if(body.classList.contains('main')){
             let closeSingUp = document.querySelector('.bobup-singUp');
             clabob.classList.remove('activebob');
             closeSingUp.classList.remove('activebob');
-            
         })
     })
     document.addEventListener('click', () =>{
@@ -132,9 +127,6 @@ if(body.classList.contains('main')){
             body.classList.remove('over');
         }
     });
-    
-    //databease form
-    
     //listen for auth status changes
     auth.onAuthStateChanged(user =>{
         if(user){
@@ -143,8 +135,8 @@ if(body.classList.contains('main')){
             app()
         }else{
             content.innerHTML = '';
-            setupUI()
             Applog()
+            setupUI()
         }
     });
     //sin up
@@ -153,14 +145,15 @@ if(body.classList.contains('main')){
         e.preventDefault()
         const email = singUpForm['singUp-email'].value;
         const password = singUpForm['singUp-pass'].value;
-
         auth.createUserWithEmailAndPassword(email, password).then(cred => {
+            const userName = singUpForm['singUp-name'];
             return db.collection('userData').doc(cred.user.uid).set({
+                userName: userName.value,
                 textArea : '',
                 toDay : '',
                 songQuoces : '',
                 songName : '',
-                titel : 'Title Here',
+                titel : 'hello ' + userName.value,
             }).then(()=>{
                 return db.collection(cred.user.uid)
             }).then(()=>{
@@ -174,9 +167,43 @@ if(body.classList.contains('main')){
             setTimeout(() => {
                 errMassage.classList.remove('activebob')
             }, 3000);
-
         })
     });
+    var provider = new firebase.auth.FacebookAuthProvider();
+    provider.setCustomParameters({
+        'display': 'popup'
+      });      
+    const fbBtn = document.querySelector('.fbBtn');
+    fbBtn.addEventListener('click', (e) =>{
+        e.preventDefault();
+
+        auth.signInWithPopup(provider)
+        // auth.signInWithPopup(provider).then((result) => {
+        //     // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+        //     var token = result.credential.accessToken;
+            
+        //     // The signed-in user info.
+        //     var user = result.user;
+        //     // ...
+        //   }).catch(function(error) {
+        //     // Handle Errors here.
+        //     var errorCode = error.code;
+        //     var errorMessage = error.message;
+        //     // The email of the user's account used.
+        //     var email = error.email;
+        //     // The firebase.auth.AuthCredential type that was used.
+        //     var credential = error.credential;
+        //     // ...
+        //   });
+          
+
+
+
+    });
+
+
+
+
     //log out
     const logOut = document.querySelector('#logOut');
     logOut.addEventListener('click', e =>{
@@ -196,13 +223,12 @@ if(body.classList.contains('main')){
                 singUpForm.reset();
             }).catch(err =>{
                 const errMassage = document.querySelector('.logerr');
-                    errMassage.textContent = err.message;
-                    errMassage.classList.add('activebob')
-                    setTimeout(() => {
-                        errMassage.classList.remove('activebob')
-                    }, 3000);
-    
-                })
+                errMassage.textContent = err.message;
+                errMassage.classList.add('activebob')
+                setTimeout(() => {
+                    errMassage.classList.remove('activebob')
+                }, 3000);
+            })
         });
     }
 }

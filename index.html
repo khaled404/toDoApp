@@ -18,7 +18,7 @@
 <body class="main">
     <nav>
         <ul>
-            <li><a href="#" class="navItem"  data-id="account" >Account</a></li>
+            <li class="Logged-in"><a href="#" class="navItem"  data-id="account" >Account</a></li>
             <li class="Logged-in" ><a href="#" id="logOut" >Log out</a></li>
             <li ><a href="#" class="navItem"  data-id="login" >Log  In</a></li>
             <li class="Logged-out" ><a href="#" class="navItem"  data-id="singup" >Sign Up</a></li>
@@ -28,7 +28,10 @@
     <div class="overlay"></div>
     <div class="bobup bobup-account" id="account" >
         <h2>Account Details</h2>
-        <div id="dataInfo"></div>
+        <div id="dataInfo">
+            <h3> Email : <span class="userEmail"></span> </h3>
+            <h3>User Name : <span class="userName"></span></h3>
+        </div>
     </div>
     <!-- <div class="bobup bobup-logIn " id="login" >
         <h2>Log In</h2>
@@ -43,17 +46,18 @@
         <h2>Sing Up</h2>
         <p class="errMassage singerr"></p>        
         <form id="singUp-form">
+            <input type="text" id="singUp-name" placeholder="User Name" required>
             <input type="email" id="singUp-email" placeholder="Email Address" required>
             <input type="password" id="singUp-pass" placeholder="Choose Password" required>
+            <!-- <input type="text" id="singUp-pass" placeholder="Choose Password" required> -->
             <button>Sing Up</button>
+            <a href="#" class="fbBtn">Facebook</a>
         </form>
     </div>
-    <div class="content">
-    </div>
-
+    <div class="content"></div>
+    
     <!-- TODO: Add SDKs for Firebase products that you want to use
         https://firebase.google.com/docs/web/setup#config-web-app -->
-
     <script>
         // Your web app's Firebase configuration
         var firebaseConfig = {
@@ -69,9 +73,7 @@
         firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
         const db = firebase.firestore();
-        // db.settings({timestampsInSnapshots: true});
     </script>   
-
     <script src="index.js"></script>
     <script src="main.js"></script>
 </body>

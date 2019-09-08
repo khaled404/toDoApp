@@ -5,20 +5,17 @@ const account = document.querySelector('#account #dataInfo');
 
 let setupUI = (user) =>{
     if(user){
-        let html = `<h3> User Email :  ${user.email} </h3>`
-        account.innerHTML = html;
+        const userEmail = document.querySelector('.userEmail');
+        userEmail.textContent =  user.email;
         LoggedInLink.forEach(item => item.style.display = 'block');
         LoggedOutLink.forEach(item => item.style.display = 'none');
         
     }else{
-        account.innerHTML = '';
+        // userEmail.textContent = '';
         LoggedInLink.forEach(item => item.style.display = 'none');
         LoggedOutLink.forEach(item => item.style.display = 'block');
     }
 }
-
-
-
 
 let showData = () =>{
     let dataHTML = `
