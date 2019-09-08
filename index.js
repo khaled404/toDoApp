@@ -94,12 +94,14 @@ function Applog(){
     let dataHTML = ` 
         <div class="logInBadge">
             <div class="logInmain bobup-logIn active " id="login" >
-                <h2>Log In</h2>
+                <h2>LogIn</h2>
                 <p class="errMassage logerr"></p>
                 <form id="logIn-form">
                     <input type="email" id="logIn-email" placeholder="Email" required>
                     <input type="password" id="logIn-pass" placeholder="Password" required>
                     <button>Log In</button>
+    
+                    <div class="fbDiv"> LogIn With <a href="#" class="fbBtnlog">Facebook</a> </div>
                 </form>
             </div>
         </div>    

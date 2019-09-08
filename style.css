@@ -213,6 +213,23 @@ nav ul li a:hover{
     transform: translate(-50%,-50%) scale(1);
 
 }
+.fbDiv{
+    margin-top: 16px;
+    font-size: 17px;
+    color: #333;
+}
+.fbDiv a{
+    text-decoration: none;
+    color: #333;
+    transition: .5s;
+    display: inline-block;
+    color: #4d47ad;
+}
+.fbDiv a:hover{
+    transform: translateX(2px);
+    color: #c77d36; 
+
+}
 
 /* title */
 .title-top{

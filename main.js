@@ -177,8 +177,6 @@ if(body.classList.contains('main')){
     fbBtn.addEventListener('click', (e) =>{
         e.preventDefault();
         auth.signInWithPopup(provider).then((cred) => {
-            console.log(provider.cred.userName)
-            let name = provider.addScope('user_birthday') ;
             
             const userName = singUpForm['singUp-name'];
             return db.collection('userData').doc(cred.user.uid).set({
@@ -198,17 +196,12 @@ if(body.classList.contains('main')){
 
 
         })
-        // .catch(function(error) {
-        //     // Handle Errors here.
-        //     var errorCode = error.code;
-        //     var errorMessage = error.message;
-        //     // The email of the user's account used.
-        //     var email = error.email;
-        //     // The firebase.auth.AuthCredential type that was used.
-        //     var credential = error.credential;
-        //     // ...
-        //   });
-          
+        const fbBtnlog = document.querySelector('.fbBtnlog');
+        fbBtnlog.addEventListener('click', (e) =>{
+            e.preventDefault();
+            auth.signInWithPopup(provider)
+        })
+              
 
 
 
