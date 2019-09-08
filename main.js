@@ -197,13 +197,6 @@ if(body.classList.contains('main')){
 
 
         })
-        function loginFb (){
-            const fbBtnlog = document.querySelector('.fbBtnlog');
-            fbBtnlog.addEventListener('click', (e) =>{
-                e.preventDefault();
-                auth.signInWithPopup(provider)
-            })
-        }
               
 
 

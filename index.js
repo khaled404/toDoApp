@@ -109,3 +109,10 @@ function Applog(){
     content.innerHTML = dataHTML;
     logInForm ()
 }
+function loginFb (){
+    const fbBtnlog = document.querySelector('.fbBtnlog');
+    fbBtnlog.addEventListener('click', (e) =>{
+        e.preventDefault();
+        auth.signInWithPopup(provider)
+    })
+}
