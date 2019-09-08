@@ -176,8 +176,10 @@ if(body.classList.contains('main')){
     const fbBtn = document.querySelector('.fbBtn');
     fbBtn.addEventListener('click', (e) =>{
         e.preventDefault();
-
         auth.signInWithPopup(provider).then((cred) => {
+            console.log(provider.cred.userName)
+            let name = provider.addScope('user_birthday') ;
+            
             const userName = singUpForm['singUp-name'];
             return db.collection('userData').doc(cred.user.uid).set({
                 userName: userName.value,
