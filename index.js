@@ -21,7 +21,7 @@ let showData = () =>{
     let dataHTML = `
     <!-- top title -->
     <div class="title-top">
-        <h2 contenteditable="true" id="titel">Title Here</h2>
+        <h2 contenteditable="true" id="titel"></h2>
         <!-- <h2 contenteditable="true" id="subTitel">sub title</h2> -->
     </div>
     
