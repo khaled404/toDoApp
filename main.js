@@ -1,134 +1,211 @@
 var body = document.querySelector('body');
 //main page
 if(body.classList.contains('main')){
-    const ToDoContainer = document.querySelector('.boxs');
-    const addItem = document.querySelector('.addcontiner');
-    const textArea = document.getElementById('textarea');
-    const today = document.getElementById('today');
-    const footerLine = document.getElementById('footerLine');
-    const songName = document.getElementById('songName');
-    const titel = document.getElementById('titel');
-    const subTitel = document.getElementById('subTitel');
-    //create elments and render data
-    function renderList(doc){
-        let li = document.createElement('li');
-        let inputChake =document.createElement('input');
-        let label =document.createElement('label');
-        let i =document.createElement('i');
-        let inputVal =document.createElement('div');
-        let closebutton = document.createElement('span');
-        //append
-        li.appendChild(inputChake);
-        li.appendChild(label);
-        label.appendChild(i);
-        li.appendChild(inputVal);
-        li.appendChild(closebutton);
-        //set attr
-        inputChake.setAttribute('type','checkbox');
-        inputChake.setAttribute('name','toDochack');
-        inputChake.setAttribute('class','checkbox');
-        inputChake.setAttribute('id',doc.id);
-        // inputVal.setAttribute('type','text');
-        inputVal.setAttribute('class','inputVal');
-        inputVal.setAttribute('name','inputVal');
-        li.setAttribute('data-id',doc.id);
-        i.setAttribute('class','flaticon-check');
-        label.setAttribute('class','box');
-        label.setAttribute('for',doc.id);
-        closebutton.setAttribute('class','close');
-        closebutton.textContent = 'x';
-        //get value
-        inputVal.textContent = doc.data().itemVal;
-        inputChake.checked = doc.data().itemChakebox;
-
-        ToDoContainer.appendChild(li)
-        // deleting data
-        closebutton.addEventListener('click', (e) =>{
-            e.stopPropagation()
-           let id = e.target.parentElement.getAttribute('data-id');
-            db.collection('ToDo').doc(id).delete();
-        })
-    }
-    //get Data
-    // db.collection('ToDo').get().then((snapshot) => {
-    //     snapshot.docs.forEach(doc => {
-    //         renderList(doc)
-    //     });
-    // });
-
-    // add item
-    addItem.addEventListener('submit',e => {
-        e.preventDefault()
-        if(addItem.inputValue.value != ''){
-            db.collection('ToDo').add({
-                itemVal : addItem.inputValue.value,
-            });
-            addItem.inputValue.value = '';
+    function app(){
+        const ToDoContainer = document.querySelector('.boxs');
+        const addItem = document.querySelector('.addcontiner');
+        const textArea = document.getElementById('textarea');
+        const today = document.getElementById('today');
+        const footerLine = document.getElementById('footerLine');
+        const songName = document.getElementById('songName');
+        const titel = document.getElementById('titel');
+        function renderList(doc){
+            // const subTitel = document.getElementById('subTitel');
+            //create elments and render data
+            let li = document.createElement('li');
+            let inputChake =document.createElement('input');
+            let label =document.createElement('label');
+            let i =document.createElement('i');
+            let inputVal =document.createElement('div');
+            let closebutton = document.createElement('span');
+            //append
+            li.appendChild(inputChake);
+            li.appendChild(label);
+            label.appendChild(i);
+            li.appendChild(inputVal);
+            li.appendChild(closebutton);
+            //set attr
+            inputChake.setAttribute('type','checkbox');
+            inputChake.setAttribute('name','toDochack');
+            inputChake.setAttribute('class','checkbox');
+            inputChake.setAttribute('id',doc.id);
+            // inputVal.setAttribute('type','text');
+            inputVal.setAttribute('class','inputVal');
+            inputVal.setAttribute('name','inputVal');
+            li.setAttribute('data-id',doc.id);
+            i.setAttribute('class','flaticon-check');
+            label.setAttribute('class','box');
+            label.setAttribute('for',doc.id);
+            closebutton.setAttribute('class','close');
+            closebutton.textContent = 'x';
+            //get value
+            inputVal.textContent = doc.data().itemVal;
+            inputChake.checked = doc.data().itemChakebox;
+    
+            ToDoContainer.appendChild(li)
+            // deleting data
+            closebutton.addEventListener('click', (e) =>{
+                e.stopPropagation()
+               let id = e.target.parentElement.getAttribute('data-id');
+                db.collection(auth.Nb.O).doc(id).delete();
+            })
         }
-    })
-    // remove data
-    db.collection('ToDo').onSnapshot(snapshot => {
-        let changes = snapshot.docChanges();
-        changes.forEach((change) =>{
-            if(change.type == 'added'){
-                renderList(change.doc)
-            } else if (change.type == 'removed') {
-                let li = ToDoContainer.querySelector('[data-id="'+ change.doc.id + '"]');
-                ToDoContainer.removeChild(li)
+        // console.log(auth.Nb.O)
+
+        // add item
+        addItem.addEventListener('submit',e => {
+            e.preventDefault()
+            if(addItem.inputValue.value != ''){
+                db.collection(auth.Nb.O).add({
+                    itemVal : addItem.inputValue.value,
+                });
+                addItem.inputValue.value = '';
             }
         })
-    });
-    // checked
-    ToDoContainer.addEventListener('click',e => {
-        chak = document.querySelectorAll('.checkbox');
-        for(let i = 0 ; i < chak.length  ; i++){
-            let chkid = chak[i].id; 
-            db.collection('ToDo').doc(chkid).update({
-                itemChakebox : chak[i].checked
-            });
+        // remove data
+        db.collection(auth.Nb.O).onSnapshot(snapshot => {
+            let changes = snapshot.docChanges();
+            changes.forEach((change) =>{
+                if(change.type == 'added'){
+                    renderList(change.doc)
+                } else if (change.type == 'removed') {
+                    let li = ToDoContainer.querySelector('[data-id="'+ change.doc.id + '"]');
+                    ToDoContainer.removeChild(li)
+                }
+            })
+        });
+        // checked
+        ToDoContainer.addEventListener('click',e => {
+            chak = document.querySelectorAll('.checkbox');
+            for(let i = 0 ; i < chak.length  ; i++){
+                let chkid = chak[i].id; 
+                db.collection(auth.Nb.O).doc(chkid).update({
+                    itemChakebox : chak[i].checked
+                });
+            }
+        });
+        db.collection('userData').doc(auth.Nb.O).get().then((doc) => {
+                textArea.value = doc.data().textArea
+                today.value = doc.data().toDay
+                footerLine.value = doc.data().songQuoces
+                songName.textContent = doc.data().songName
+                titel.textContent = doc.data().titel
+        });
+    
+        document.addEventListener('keyup',e => {
+            if(auth.Nb.O){
+                db.collection('userData').doc(auth.Nb.O).update({
+                    textArea : textArea.value,
+                    toDay : today.value,
+                    songQuoces : footerLine.value,
+                    songName : songName.textContent,
+                    titel : titel.textContent,
+    
+                })
+            }
+        })
+    }
+    //open and close bobUp
+    let navItem = document.querySelectorAll('.navItem');
+    const overlay = document.querySelector('.overlay');
+    navItem.forEach(e => {
+        e.addEventListener('click', el => {
+            const bobup = document.getElementById(el.target.getAttribute('data-id'));
+                bobup.classList.add('activebob');
+                overlay.classList.add('active');
+        })
+    })
+    overlay.addEventListener('click',()=>{
+        overlay.classList.remove('active');
+        navItem.forEach((el , index) => {
+            let clabob = document.querySelector('.bobup');
+            let closeSingUp = document.querySelector('.bobup-singUp');
+            clabob.classList.remove('activebob');
+            closeSingUp.classList.remove('activebob');
+            
+        })
+    })
+    document.addEventListener('click', () =>{
+        if(overlay.classList.contains('active')){
+            body.classList.add('over');
+        }else{
+            body.classList.remove('over');
         }
     });
-
-    //main textArea 
-    db.collection('documentText').onSnapshot(snapshot => {
-        snapshot.docs.forEach(doc => {
-            textArea.value = doc.data().textArea
-        })
-
-    }); 
-    // db.collection('documentText').get().then((snapshot) => {
-    //     snapshot.docs.forEach(doc => {
-    //         textArea.value = doc.data().textArea
-    //     })
-    // });
-
-    textArea.addEventListener('keyup',e => {
-        db.collection('documentText').doc('textArea_1').update({
-            textArea : textArea.value,
-        });
-    })
-    //subText
-    db.collection('subText').onSnapshot(snapshot => {
-        snapshot.docs.forEach(doc => {
-            today.value = doc.data().toDay
-            footerLine.value = doc.data().songQuoces
-            songName.textContent = doc.data().songName
-            titel.textContent = doc.data().titel
-            subTitel.textContent = doc.data().subTitel
-        });
+    
+    //databease form
+    
+    //listen for auth status changes
+    auth.onAuthStateChanged(user =>{
+        if(user){
+            showData();
+            setupUI(user);
+            app()
+        }else{
+            content.innerHTML = '';
+            setupUI()
+            Applog()
+        }
     });
-    document.addEventListener('keyup',e =>{
-        db.collection('subText').doc('text').update({
-            toDay : today.value,
-            songQuoces : footerLine.value,
-            songName : songName.textContent,
-            titel : titel.textContent,
-            subTitel : subTitel.textContent,
-        });
+    //sin up
+    const singUpForm = document.querySelector('#singUp-form');
+    singUpForm.addEventListener('submit', (e) =>{
+        e.preventDefault()
+        const email = singUpForm['singUp-email'].value;
+        const password = singUpForm['singUp-pass'].value;
+
+        auth.createUserWithEmailAndPassword(email, password).then(cred => {
+            return db.collection('userData').doc(cred.user.uid).set({
+                textArea : '',
+                toDay : '',
+                songQuoces : '',
+                songName : '',
+                titel : 'Title Here',
+            }).then(()=>{
+                return db.collection(cred.user.uid)
+            }).then(()=>{
+                overlay.click()
+                singUpForm.reset();
+            })
+        }).catch(err =>{
+            const errMassage = document.querySelector('.singerr');
+            errMassage.textContent = err.message;
+            errMassage.classList.add('activebob')
+            setTimeout(() => {
+                errMassage.classList.remove('activebob')
+            }, 3000);
+
+        })
+    });
+    //log out
+    const logOut = document.querySelector('#logOut');
+    logOut.addEventListener('click', e =>{
+        e.preventDefault();
+        auth.signOut();
     })
-
+    //log in
+    function logInForm (){  
+        const logInForm = document.querySelector('#logIn-form');
+        logInForm.addEventListener('submit', (e) =>{
+            e.preventDefault()
+            const email = logInForm['logIn-email'].value;
+            const password = logInForm['logIn-pass'].value;
+            
+            auth.signInWithEmailAndPassword(email, password).then(cred => {
+                overlay.click()
+                singUpForm.reset();
+            }).catch(err =>{
+                const errMassage = document.querySelector('.logerr');
+                    errMassage.textContent = err.message;
+                    errMassage.classList.add('activebob')
+                    setTimeout(() => {
+                        errMassage.classList.remove('activebob')
+                    }, 3000);
+    
+                })
+        });
+    }
 }
-
 // // about page 
 if(body.classList.contains('page-about')){
     const name = document.getElementById('name');

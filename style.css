@@ -7,6 +7,200 @@ body{
     font-family: 'Caveat Brush', cursive;
     padding: 30px;
 }
+body.over{
+    overflow: hidden;
+}
+.newUser{
+    font-size: 60px;
+    margin-top: 60px;
+    color: #c77d36;
+    text-align: center;
+}
+.newUser span {
+    color:#4d47ad;
+
+}
+/*navbar*/
+nav{
+    display: flex;
+    width: 100%;
+    height: 50px;
+    /* background-color: #aaf; */
+    /* padding: 10px; */
+}
+nav ul{
+    margin: 0;
+    margin-bottom: 10px;
+    padding: 0;
+    display: flex;
+    margin-left: auto;
+    list-style: none;
+    align-items: center;
+    justify-content: center;
+
+}
+nav ul li {
+    margin-right: 15px;
+    display: none;
+}
+nav ul li a{
+    text-decoration: none;
+    font-size: 20px;
+    color: #c77d36;
+    transition: .5s;
+    letter-spacing: 1px;
+    font-family: 'Livvic', sans-serif;
+}
+nav ul li a:hover{
+    color: #4d47ad;
+}
+.logInBadge{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+}
+.overlay{
+    background-color: rgba(0,0,0,.4);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 888;
+    visibility: hidden;
+    opacity: 0;
+    transition: .5s;
+    transform: scale(.97);
+
+}
+.bobup,
+.logInmain{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%) scale(.8);
+    background-color: #fff;
+    width: 600px;
+    height: 400px;
+    border-radius: 10px;
+    padding: 10px;
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;   
+    flex-direction: column;
+    opacity: 0;
+    visibility: hidden;
+    transition: .5s;
+    box-shadow: 1px 1px 10px rgba(0,0,0,.5);
+    backface-visibility: hidden;
+    font-family: 'Livvic', sans-serif;
+}
+.logInmain{
+    position: static;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    box-shadow: unset;
+    font-family: 'Livvic', sans-serif;
+    transform: translate(0,0) scale(1);
+    /* border: 2.5px dotted #c77d36; */
+
+}
+.errMassage{
+    position: absolute;
+    top: 28%;
+    left: 50%;
+    border-radius: 10px;
+    box-shadow: 1px 1px 10px rgba(0,0,0,.07);
+    background: #c77d36;
+    width: 500px;
+    padding: 10px;
+    font-size: 17px;
+    color: #fff;
+    font-family: 'Livvic', sans-serif;
+    transform: translate(-50%,-50%) scale(.9);
+    transition: .5s;
+    opacity:0;
+    visibility: hidden;
+}
+.bobup h2,
+.logInmain h2 {
+    margin-bottom: auto;
+    color: #c77d36;
+    font-size: 40px;
+    letter-spacing: 1px;
+    margin-top: 20px;
+}
+.bobup form,
+.logInmain form{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: auto;
+    width: 350px;
+    backface-visibility: hidden;
+
+}
+.bobup form input,
+.logInmain form input{
+    width: 100%;
+    margin-bottom: 30px;
+    padding: 5px 10px;
+    border: none;
+    border-bottom: 2.5px dotted #c77d36;
+    font-size: 14px;
+    font-family: 'Livvic', sans-serif;
+    transition: .5s;
+    backface-visibility: hidden;
+
+}
+.bobup form input:focus,
+.logInmain form input:focus{
+    border-color: #4d47ad;
+}   
+.bobup form button,
+.logInmain form button{
+    backface-visibility: hidden;
+    width: 115px;
+    padding: 8px 20px;
+    border-radius: 100px;
+    /* font-size: 15px; */
+    margin-right : auto;
+    background-color: transparent;
+    border: 2px solid #c77d36;
+    color: #c77d36;
+    font-size: 15px;
+    font-weight: bold;
+    transition: .5s;
+    cursor: pointer;
+    font-family: 'Livvic', sans-serif;
+}
+
+.bobup form button:hover,
+.logInmain form button:hover{
+    background-color: #c77d36;
+    color: #fff;
+    transform: translateY(-1px)
+}
+.bobup form button:active,
+.logInmain form button:active{
+    transform: translateY(1px)
+}
+.active{
+    visibility: visible;
+    opacity: 1;
+    transform: scale(1);
+
+}
+.activebob{
+    visibility: visible;
+    opacity: 1;
+    transform: translate(-50%,-50%) scale(1);
+
+}
+
 /* title */
 .title-top{
     display: flex;
@@ -97,7 +291,7 @@ body{
     bottom: 0;
     right: 0;
     scroll-snap-type: none;
-    font-family: 'Lexend Exa', sans-serif;
+    font-family: 'Livvic', sans-serif;
 }
 
 .lines span{
@@ -120,7 +314,6 @@ body{
 .box-left-bottom fieldset{
     text-align: center;
     min-height: 330px;
-
     transform: translateY(50px);
     border-radius: 30px;
     border: 4px solid #4d47ad;
@@ -145,13 +338,15 @@ body{
 }
 li .inputVal{
     display: block;
-    font-family: 'Lexend Exa', sans-serif;
+    font-family: 'Livvic', sans-serif;
     width: 190px;
-    margin: 0 10px;
+    margin-left: 10px;
     border-bottom: 1px solid #c77d36;
     text-align: left;
+    overflow: hidden;
+    
 }   
- label{
+label{
     width: 22px;
     height: 20px;
     border: 1.2px solid #c77d36;
@@ -188,6 +383,7 @@ label i{
     color: #4d47ad;
     transition: .5s;
     opacity: 0;
+    visibility: hidden;
     font-size: 25px;
     font-weight: 900;
 }
@@ -209,8 +405,8 @@ label i{
     border-bottom: 1px solid #c77d36;
     outline: none;
     font-size: 15px;
-    font-family: 'Lexend Exa', sans-serif;
-    width: 100%;
+    font-family: 'Livvic', sans-serif;
+    width: 227px;
 }
 .addCheckbox{
     padding: 5px ;
@@ -268,7 +464,7 @@ footer .icon-box:last-of-type {
     font-size: 20px;
     border-top-right-radius: 50px;
     border-bottom-left-radius: 25px;
-    font-family: 'Lexend Exa', sans-serif;
+    font-family: 'Livvic', sans-serif;
 
 }
 .footer-name{
@@ -290,7 +486,7 @@ footer .icon-box:last-of-type {
     color: #c77d36;
     display: block;
     text-align: center;
-    height: 30px;
+    height: 45px;
     background-color: transparent;
     resize: none;
     overflow: hidden;
@@ -314,7 +510,7 @@ footer .icon-box:last-of-type {
     border-bottom: 2px dotted #c77d36;
     margin-right: 10px;
     margin-left: 10px;
-    font-family: 'Lexend Exa', sans-serif;
+    font-family: 'Livvic', sans-serif;
 
 }
 .logo{
