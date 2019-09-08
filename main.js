@@ -137,6 +137,7 @@ if(body.classList.contains('main')){
             content.innerHTML = '';
             Applog()
             setupUI()
+            loginFb()
         }
     });
     //sin up
@@ -196,11 +197,13 @@ if(body.classList.contains('main')){
 
 
         })
-        const fbBtnlog = document.querySelector('.fbBtnlog');
-        fbBtnlog.addEventListener('click', (e) =>{
-            e.preventDefault();
-            auth.signInWithPopup(provider)
-        })
+        function loginFb (){
+            const fbBtnlog = document.querySelector('.fbBtnlog');
+            fbBtnlog.addEventListener('click', (e) =>{
+                e.preventDefault();
+                auth.signInWithPopup(provider)
+            })
+        }
               
 
 
