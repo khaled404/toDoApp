@@ -44,6 +44,7 @@ let showData = () =>{
                             </ul>
                         </fieldset>
                     </div>
+                    
                 </div>
             <div class="lines" >
                 <textarea name="note" id="textarea" class="textar"></textarea>
@@ -64,6 +65,7 @@ let showData = () =>{
                 <span></span>
             </div>    
         </div>
+        
     <!-- footer -->
     <footer>
         <textarea id="footerLine" class="footer-line"></textarea>
@@ -86,6 +88,8 @@ let showData = () =>{
             <h2>دَوَّنَهَا</h2>
         </div>
     </footer>
+    <a href="/" id="next" class="addNewDay">Add Day</a>
+    <a href="/" id="prev" class="addNewDay-prev">Prev Day</a>
 `
 content.innerHTML = dataHTML;
 }
@@ -93,6 +97,7 @@ content.innerHTML = dataHTML;
 function Applog(){
     let dataHTML = ` 
         <div class="logInBadge">
+        <img src="logo.png" alt="logo" class="logo"> 
             <div class="logInmain bobup-logIn active " id="login" >
                 <h2>LogIn</h2>
                 <p class="errMassage logerr"></p>
@@ -100,7 +105,6 @@ function Applog(){
                     <input type="email" id="logIn-email" placeholder="Email" required>
                     <input type="password" id="logIn-pass" placeholder="Password" required>
                     <button>Log In</button>
-    
                     <div class="fbDiv"> LogIn With <a href="#" class="fbBtnlog">Facebook</a> </div>
                 </form>
             </div>

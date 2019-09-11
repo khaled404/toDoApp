@@ -100,7 +100,17 @@ if(body.classList.contains('main')){
                 })
             }
         })
+        // let 
+        let prev = document.querySelector('#prev')
+        , next = document.querySelector('#next');
+        
+        next.addEventListener('click',(e)=>{
+            e.preventDefault();
+        
+        });
+    
     }
+
     //open and close bobUp
     let navItem = document.querySelectorAll('.navItem');
     const overlay = document.querySelector('.overlay');

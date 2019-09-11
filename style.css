@@ -10,6 +10,12 @@ body{
 body.over{
     overflow: hidden;
 }
+.logo{
+    width: 90px;
+    height: auto;
+    margin-bottom: 10px;
+    margin-top: 0;
+}
 .newUser{
     font-size: 60px;
     margin-top: 60px;
@@ -470,6 +476,9 @@ footer{
     align-items: center;
     position: absolute;
 }
+footer{
+    margin-bottom: 50px;
+}
 footer .icon-box i {
     color: #4d47ad;
     font-size: 55px;
@@ -543,19 +552,26 @@ footer .icon-box:last-of-type {
     font-family: 'Livvic', sans-serif;
 
 }
-.logo{
-    background-color: #fff;
-    width: 137px;
+.addNewDay,
+.addNewDay-prev{
+    display: block;
+    position: fixed;
+    bottom: 15px;
+    right: 20px;
+    padding: 10px;
+    width: 130px;
     height: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
-    position: absolute;
-    bottom: -25px;
-    left: 45px;
+    border-radius: 100px;
+    background-color: #c77d36;
+    color: #fff;
+    text-decoration: none;
+    font-size: 20px;
+    font-family: 'Livvic', sans-serif;
+    z-index: 100;
 }
-.logo h2 {
-    font-family: 'Lemonada', cursive;
-    color: #c77d36;
-    font-size: 30px;
+.addNewDay-prev{
+    right: 180px;
 }
