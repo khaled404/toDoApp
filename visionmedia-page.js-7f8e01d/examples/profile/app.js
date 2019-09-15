@@ -9,7 +9,7 @@ page.base('/profile');
 page('/', index);
 // display the index page again after 5s
 // only for user related pages
-page('/user/*', displayIndexAfter(5000));
+// page('/user/*', displayIndexAfter(5000));
 // you dont need to use two,
 // but this demonstrates how
 // you can "filter" requests

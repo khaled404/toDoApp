@@ -15,7 +15,8 @@ function photos(ctx) {
   console.log('showing page %s : %s..%s', page, from, to);
   var photos = images.slice(from, to);
   display(photos);
-  adjustPager(page);
+  adjustPager(page);  
+  // console.log(ctx)
 }
 
 function notfound() {
@@ -41,36 +42,8 @@ function adjustPager(page) {
     prev.style.display = 'none';
   }
 
-  next.setAttribute('href', '/album/photos/' + (page + 1));
+  next.setAttribute('href', '/albu  m/photos/' + (page + 1));
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 var images = [
     'http://upload.wikimedia.org/wikipedia/en/7/76/Grim_Fandango_artwork.jpg'
   , 'http://www.xblafans.com/wp-content/uploads//2011/08/Grim-Fandango1.jpg'

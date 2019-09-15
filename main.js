@@ -1,6 +1,8 @@
 var body = document.querySelector('body');
 //main page
 if(body.classList.contains('main')){
+    var bageCount ;
+    var rabdId = db.collection('userData').doc().id;
     function app(){
         const ToDoContainer = document.querySelector('.boxs');
         const addItem = document.querySelector('.addcontiner');
@@ -16,6 +18,7 @@ if(body.classList.contains('main')){
             let i =document.createElement('i');
             let inputVal =document.createElement('div');
             let closebutton = document.createElement('span');
+            const getUserName = document.querySelector('.userName');
             //append
             li.appendChild(inputChake);
             li.appendChild(label);
@@ -44,72 +47,163 @@ if(body.classList.contains('main')){
             closebutton.addEventListener('click', (e) =>{
                 e.stopPropagation()
                let id = e.target.parentElement.getAttribute('data-id');
-                db.collection(auth.O).doc(id).delete();
+                db.collection(auth.O+'_chake_'+bageCount).doc(id).delete();
             })
+            // ToDoContainer.innerHTML = '';
         }
-        // add item
-        addItem.addEventListener('submit',e => {
-            e.preventDefault()
-            if(addItem.inputValue.value != ''){
-                db.collection(auth.O).add({
-                    itemVal : addItem.inputValue.value,
-                });
-                addItem.inputValue.value = '';
-            }
-        })
-        // remove data
-        db.collection(auth.O).onSnapshot(snapshot => {
-            let changes = snapshot.docChanges();
-            changes.forEach((change) =>{
-                if(change.type == 'added'){
-                    renderList(change.doc)
-                } else if (change.type == 'removed') {
-                    let li = ToDoContainer.querySelector('[data-id="'+ change.doc.id + '"]');
-                    ToDoContainer.removeChild(li)
+        function addPageLink(doc){
+            const addPageLinkCon =document.querySelector('#addPageLinkCon');
+            let pali = document.createElement('li');
+            let a = document.createElement('a');
+            a.setAttribute('href',doc.data().hrefVal);
+            a.textContent = 'Page ' + doc.data().countNum;
+            pali.appendChild(a);
+
+            addPageLinkCon.appendChild(pali);
+        }
+        const addPage = document.querySelector('.addNewDay');
+        page.base('/notes');
+        page('/', '/note/0');
+        page('/note/:page',callNote)
+        page();
+        addPage.addEventListener('click', () =>{
+            let count = bageCount+1;
+            addPage.setAttribute('href','/notes/note/' + count);
+            db.collection(auth.O+'_bages').doc(auth.O+'_page_'+bageCount).set({
+                hrefVal : addPage.getAttribute('href'),
+                countNum: count
+            });
+        }); 
+        
+        function callNote(ctx){
+            textArea.value = '';
+            today.value = '';
+            footerLine.value = '';
+            songName.textContent = '';
+            titel.textContent = '';
+            ToDoContainer.innerHTML = '';
+            db.collection('userData').doc(auth.O+'_page_'+bageCount).get().then((docSnapshot) => {
+                if (docSnapshot.exists) {
+                    getData()
+                }else{
+                    db.collection('userData').doc(auth.O+'_page_'+bageCount).set({
+                        textArea : '',
+                        toDay : '',
+                        songQuoces : '',
+                        songName : '',
+                        titel : 'Titel',
+                    });    
                 }
             })
+            addChake()
+            if (ToDoContainer.innerHTML = '') {
+                db.collection(auth.O+'_chake_'+bageCount).onSnapshot(snapshot => {
+                    let changes = snapshot.docChanges();
+                    changes.forEach((change) =>{
+                        renderList(change.doc)
+                    })
+                });
+            }else{
+                db.collection(auth.O+'_chake_'+bageCount).onSnapshot(snapshot => {
+                    let changes = snapshot.docChanges();
+                    changes.forEach((change) =>{
+                        if(change.type == 'added'){
+                            renderList(change.doc)
+                        } else if (change.type == 'removed') {
+                            let li = ToDoContainer.querySelector('[data-id="'+ change.doc.id + '"]');
+                            ToDoContainer.removeChild(li)
+                        }
+                    })
+                });
+
+            }
+    
+            if(ctx.params.page){
+                return bageCount = ~~ctx.params.page;
+            }
+        }
+        
+        if (bageCount == undefined) {
+            bageCount ='0';
+        }
+        db.collection(auth.O+'_bages').onSnapshot(snapshot => {
+            let changes = snapshot.docChanges();
+            changes.forEach((change) =>{
+                addPageLink(change.doc)
+            })
         });
+        function addChake(){
+            // add item
+            addItem.addEventListener('submit',e => {
+                e.preventDefault()
+                if(addItem.inputValue.value != ''){
+                    db.collection(auth.O+'_chake_'+bageCount).add({
+                        itemVal : addItem.inputValue.value,
+                    });
+                    addItem.inputValue.value = '';
+                }
+            })
+        }
+        // remove data
+        // db.collection(auth.O+'_chake_'+bageCount).onSnapshot(snapshot => {
+        //     let changes = snapshot.docChanges();
+        //     changes.forEach((change) =>{
+        //         if(change.type == 'added'){
+        //             renderList(change.doc)
+        //         } else if (change.type == 'removed') {
+        //             let li = ToDoContainer.querySelector('[data-id="'+ change.doc.id + '"]');
+        //             ToDoContainer.removeChild(li)
+        //         }
+        //     })
+        // });
         // checked
         ToDoContainer.addEventListener('click',e => {
             chak = document.querySelectorAll('.checkbox');
             for(let i = 0 ; i < chak.length  ; i++){
                 let chkid = chak[i].id; 
-                db.collection(auth.Nb.O).doc(chkid).update({
+                db.collection(auth.O+'_chake_'+bageCount).doc(chkid).update({
                     itemChakebox : chak[i].checked
                 });
             }
         });
         const getUserName = document.querySelector('.userName');
-        db.collection('userData').doc(auth.O).get().then((doc) => {
+        db.collection('userData').doc(auth.O+'_page_0').get().then((doc) => {
+            getUserName.textContent = doc.data().userName;
+        })
+        function getData(){
+            db.collection('userData').doc(auth.O+'_page_'+bageCount).get().then((doc) => {
                 textArea.value = doc.data().textArea;
                 today.value = doc.data().toDay;
                 footerLine.value = doc.data().songQuoces;
                 songName.textContent = doc.data().songName;
                 titel.textContent = doc.data().titel;
-                getUserName.textContent = doc.data().userName;
-        });
+            }).catch(()=>{
+                db.collection('userData').doc(auth.O+'_page_'+bageCount).set({
+                    textArea : '',
+                    toDay : '',
+                    songQuoces : '',
+                    songName : '',
+                    titel : 'Titel',
+                });
+            })
+        }
         document.addEventListener('keyup',e => {
-            if(auth.O){
-                db.collection('userData').doc(auth.O).update({
-                    textArea : textArea.value,
-                    toDay : today.value,
-                    songQuoces : footerLine.value,
-                    songName : songName.textContent,
-                    titel : titel.textContent,
-    
-                })
-            }
+            db.collection('userData').doc(auth.O+'_page_'+bageCount).get().then((doc) => {
+                if (doc.exists && auth.O) {
+                    db.collection('userData').doc(auth.O+'_page_'+bageCount).update({
+                        textArea : textArea.value,
+                        toDay : today.value,
+                        songQuoces : footerLine.value,
+                        songName : songName.textContent,
+                        titel : titel.textContent,
+                    })
+                }
+            })
         })
-        // let 
-        let prev = document.querySelector('#prev')
-        , next = document.querySelector('#next');
-        
-        next.addEventListener('click',(e)=>{
-            e.preventDefault();
-        
-        });
     
-    }
+    
+    }      
+
 
     //open and close bobUp
     let navItem = document.querySelectorAll('.navItem');
@@ -158,13 +252,13 @@ if(body.classList.contains('main')){
         const password = singUpForm['singUp-pass'].value;
         auth.createUserWithEmailAndPassword(email, password).then(cred => {
             const userName = singUpForm['singUp-name'];
-            return db.collection('userData').doc(cred.user.uid).set({
+            return db.collection('userData').doc(cred.user.uid+'_page_0').set({
                 userName: userName.value,
                 textArea : '',
                 toDay : '',
                 songQuoces : '',
                 songName : '',
-                titel : 'hello ' + userName.value,
+                titel : 'Titel' ,
             }).then(()=>{
                 return db.collection(cred.user.uid)
             }).then(()=>{
@@ -203,15 +297,7 @@ if(body.classList.contains('main')){
                 singUpForm.reset();
             })
         })
-              
-
-
-
     });
-
-
-
-
     //log out
     const logOut = document.querySelector('#logOut');
     logOut.addEventListener('click', e =>{

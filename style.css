@@ -10,7 +10,7 @@ body{
 body.over{
     overflow: hidden;
 }
-.logo{
+.logoImg{
     width: 90px;
     height: auto;
     margin-bottom: 10px;
@@ -31,6 +31,7 @@ nav{
     display: flex;
     width: 100%;
     height: 50px;
+    position: relative;
     /* background-color: #aaf; */
     /* padding: 10px; */
 }
@@ -343,6 +344,9 @@ nav ul li a:hover{
 *{
     outline: none;
 }
+#titel{
+    min-width: 50px;
+}
 /*note-body-bottom*/
 .note-body-bottom{
     display: flex;
@@ -552,15 +556,12 @@ footer .icon-box:last-of-type {
     font-family: 'Livvic', sans-serif;
 
 }
-.addNewDay,
-.addNewDay-prev{
+.addNewDay{
     display: block;
     position: fixed;
     bottom: 15px;
     right: 20px;
     padding: 10px;
-    width: 130px;
-    height: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -572,6 +573,91 @@ footer .icon-box:last-of-type {
     font-family: 'Livvic', sans-serif;
     z-index: 100;
 }
-.addNewDay-prev{
-    right: 180px;
+.allDays{
+    cursor: pointer;
+    position: absolute;
+    left: 15px;
+    top:-15px;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100px;
+    background-color: #c77d36;
+    text-decoration: none;
+    font-family: 'Livvic', sans-serif;
+    color: #fff;
+}
+.allDays h2{
+    font-size: 20px;
+    font-weight: 400;
+}
+.allDays ul{
+    max-height: 250px;
+    overflow: auto;
+    z-index: 100;
+    background-color: #c77d36;
+    position: absolute;
+    top: 56px;
+    left: -20px;
+    width: 150px;
+    display: block;
+    border-radius: 10px;
+    opacity: 0;
+    visibility: hidden;
+    transition: .3s;
+}
+.allDays ul::-webkit-scrollbar{
+    width: 10px;
+    background-color: transparent;
+}
+.allDays ul::-webkit-scrollbar-thumb{
+    width: 2px;
+    background-color: #4d47ad;
+    border-radius: 10px;
+}
+.allDays ul::before{
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: block;
+    border-right: 10px solid transparent;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid #c77d36;
+    border-left: 10px solid transparent;
+}
+.allDays ul li{
+    padding: 7px 15px;
+    display: block;
+}
+.allDays ul li a{
+    color: #fff;
+    font-size: 16px;
+    display: block;
+}
+.allDays ul li a:hover{
+    color: rgba(255,255,255,.8);
+    transform: translateX(2px)
+}
+.allDays:hover ul {
+    opacity: 1;
+    visibility: visible;
+}
+.logo{
+    background-color: #fff;
+    width: 137px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    bottom: -25px;
+    left: 45px;
+}
+.logo h2 {
+    font-family: 'Lemonada', cursive;
+    color: #c77d36;
+    font-size: 30px;
 }

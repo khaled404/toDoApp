@@ -31,7 +31,7 @@ let showData = () =>{
                 <div class="box-left-top">
                         <p>today is</p>
                         <textarea id="today" name="day"></textarea>
-                        <img src="font/custom.svg" alt="custom icon">
+                        <!-- <img src="font/custom.svg" alt="custom icon"> -->
                     </div>
                     <div class="box-left-bottom">
                         <fieldset>
@@ -86,10 +86,9 @@ let showData = () =>{
         </div>
         <div class="logo">
             <h2>دَوَّنَهَا</h2>
-        </div>
+        </div> 
     </footer>
-    <a href="/" id="next" class="addNewDay">Add Day</a>
-    <a href="/" id="prev" class="addNewDay-prev">Prev Day</a>
+    <a href="/" class="addNewDay">Add Page</a>
 `
 content.innerHTML = dataHTML;
 }
@@ -97,7 +96,7 @@ content.innerHTML = dataHTML;
 function Applog(){
     let dataHTML = ` 
         <div class="logInBadge">
-        <img src="logo.png" alt="logo" class="logo"> 
+        <img src="logo.png" alt="logo" class="logoImg"> 
             <div class="logInmain bobup-logIn active " id="login" >
                 <h2>LogIn</h2>
                 <p class="errMassage logerr"></p>
